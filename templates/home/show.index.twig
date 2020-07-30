@@ -11,8 +11,9 @@
         </p>
     </article>
     <a href="{{ path('edit', {id: pins.id}) }}">Edit</a>
-    <form action="{{ path('delete', {id: pins.id}) }}", method="GET"
-        <input name="_method" value="DELETE">
+    <form id="submit" action="{{ path('delete', {id: pins.id}) }}", method="GET">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token('delete' ~ pins.id) }}">
+        <input type="hidden" name="_method" value="DELETE">
         <input type="submit" value="Delete" >
     </form>
 {% endblock %}

@@ -93,11 +93,17 @@ class HomeController extends AbstractController
      * @return Response
      * @author scotttresor <scotttresor@gmail.com>
      */
-    public function delete(Pins $pins, EntityManagerInterface $em): Response
+    public function delete(Request $request, Pins $pins, EntityManagerInterface $em): Response
     {
-        $em->remove($pins);
-        $em->flush();
+        if (
+            $this->isCsrfTokenValid(
+                'delete'.$pins->getId(),
+                $request->request->get('csrf_token')
+            ))
+        {
+            $em->remove($pins);
+            $em->flush();
+        }
         return $this->redirectToRoute('home');
     }
-    
 }
