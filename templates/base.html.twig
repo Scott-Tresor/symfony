@@ -6,6 +6,8 @@
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
+        {% include "layouts/flash/_flash.html.twig" %}
+
         {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}
     </body>

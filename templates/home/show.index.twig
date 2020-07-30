@@ -9,6 +9,10 @@
         <p>
             {{ pins.description }}
         </p>
+
+        <p>
+            Poster il y a {{ pins.createdAt|ago }}
+        </p>
     </article>
 
     <a href="{{ path('edit', {id: pins.id}) }}">Edit</a>

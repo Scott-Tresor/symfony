@@ -35,13 +35,13 @@ class HomeController extends AbstractController
     public function create(Request $request, EntityManagerInterface $em): Response
     {
         $form = $this->createForm(PinType::class);
-
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $pin = $form->getData();
             $em->persist($pin);
             $em->flush();
+            $this->addFlash('success','Message poster avec success');
             return $this->redirectToRoute('home');
         }
 
@@ -72,12 +72,12 @@ class HomeController extends AbstractController
     public function edit(Pins $pins, Request $request, EntityManagerInterface $em): Response
     {
         $form = $this->createForm(PinType::class, $pins,['method'=> 'PUT']);
-
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $pin = $form->getData();
             $em->flush();
+            $this->addFlash('success','Message modifier avec success');
             return $this->redirectToRoute('home');
         }
         return $this->render('home/edit.index.twig',[
@@ -87,7 +87,7 @@ class HomeController extends AbstractController
     }
 
     /**
-     * @Route("/pins/{id<[0-9]+>}/delete", name="delete")
+     * @Route("/pins/{id<[0-9]+>}", name="delete", methods="DELETE")
      * @param Pins $pins
      * @param EntityManagerInterface $em
      * @return Response
@@ -103,6 +103,7 @@ class HomeController extends AbstractController
         {
             $em->remove($pins);
             $em->flush();
+            $this->addFlash('info','Message effacer avec success ');
         }
         return $this->redirectToRoute('home');
     }
