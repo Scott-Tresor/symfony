@@ -1,7 +1,9 @@
-{% for type, messages in app.flashes %}
-    {% for message in messages %}
-        <div class="alert alert-{{type}}" role="alert">
-        {{ message }}
-        </dvi>
+<div>
+    {% for type, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="alert alert-{{type}}" role="alert">
+                {{ message }}
+            </dvi>
+        {% endfor %}
     {% endfor %}
-{% endfor %}
+</div>

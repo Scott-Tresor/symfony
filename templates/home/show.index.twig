@@ -3,23 +3,24 @@
 {% block title %}Pinterest | {{ pins.titre}} {% endblock %}
 
 {% block body %}
-    <article>
-        <h2>{{ pins.titre }}</h2>
+    <div class="container mt-2">
+        <article>
+            <h2>{{ pins.titre }}</h2>
 
-        <p>
-            {{ pins.description }}
-        </p>
+            <p>
+                {{ pins.description }}
+            </p>
 
-        <p>
-            Poster il y a {{ pins.createdAt|ago }}
-        </p>
-    </article>
+            <p>
+                Poster il y a {{ pins.createdAt|ago }}
+            </p>
+        </article>
 
-    <a href="{{ path('edit', {id: pins.id}) }}">Edit</a>
-    <form id="submit" action="{{ path('delete', {id: pins.id}) }}" method="POST">
-        <input type="hidden" name="csrf_token" value="{{ csrf_token('supprimer_' ~ pins.id) }}">
-        <input type="hidden" name="_method" value="DELETE">
-        <input type="submit" value="Delete" >
-    </form>
+        <a href="{{ path('edit', {id: pins.id}) }}">Edit</a>
+        <form id="submit" action="{{ path('delete', {id: pins.id}) }}" method="POST">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token('supprimer_' ~ pins.id) }}">
+            <input type="hidden" name="_method" value="DELETE">
+            <input type="submit" value="Delete">
+        </form>
+    </div>
 {% endblock %}
- 

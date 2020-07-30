@@ -3,6 +3,13 @@
 {% block title %}Pinterest | Edition {{ pins.id }} {% endblock %}
 
 {% block body %}
-    <h1>Edited pins {{ pins.id }} </h1>
-    {{ include('layouts/forms/_form.thml.twig', {'submit': 'Edition'}) }}
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 mx-auto">
+            <h1>Edited pins {{ pins.id }} </h1>
+            
+            {{ include('layouts/forms/_form.thml.twig', {'submit': 'Edition'}) }}
+        </div>
+    </div>
+</div>
 {% endblock %}
