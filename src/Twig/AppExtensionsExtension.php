@@ -25,8 +25,9 @@ class AppExtensionsExtension extends AbstractExtension
         ];
     }
 
-    public function doSomething($value)
+    public function doSomething(int $count, string $singular, string $plural): string
     {
-        return $this;
+        $string = $count === 1 ? $singular : $plural;
+        return "$count $string";
     }
 }

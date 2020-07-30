@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Pinterest | {{ pins.tite}} {% endblock %}
+
+{% block body %}
+    <article>
+        <h2>{{ pins.title }}</h2>
+
+        <p>
+            {{ pins.description }}
+        </p>
+    </article>
+{% endblock %}
