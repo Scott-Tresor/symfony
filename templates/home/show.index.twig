@@ -1,13 +1,18 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Pinterest | {{ pins.tite}} {% endblock %}
+{% block title %}Pinterest | {{ pins.titre}} {% endblock %}
 
 {% block body %}
     <article>
-        <h2>{{ pins.title }}</h2>
+        <h2>{{ pins.titre }}</h2>
 
         <p>
             {{ pins.description }}
         </p>
     </article>
+    <a href="{{ path('edit', {id: pins.id}) }}">Edit</a>
+    <form action="{{ path('delete', {id: pins.id}) }}", method="GET"
+        <input name="_method" value="DELETE">
+        <input type="submit" value="Delete" >
+    </form>
 {% endblock %}

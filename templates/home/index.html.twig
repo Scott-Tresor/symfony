@@ -4,9 +4,10 @@
 
 {% block body %}
     <h1>{{ pularize(pin|length, 'Pin', 'Pins') }}</h1>
+    <a href="{{ path('create') }}">Creation</a>
     {% for pins in pin %}
         <article>
-            <h2><a href="{{ path('detail', { id: pins.id }) }}">{{ pins.title }}</a></h2>
+            <h2><a href="{{ path('detail', { id: pins.id }) }}">{{ pins.titre }}</a></h2>
 
             <p>
                 {{ pins.description }}
