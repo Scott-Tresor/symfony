@@ -5,9 +5,6 @@
 {% block body %}
     <h1>Created pins </h1>
 
-    {{ form_start(form) }}
-        {{ form_widget(form) }}
+    {{ include('home/_form.thml.twig', {'submit': 'Creation'}) }}
 
-        <input type="submit" value="envoyer" formnovalidate>
-    {{ form_end(form) }}
 {% endblock %}

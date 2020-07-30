@@ -10,10 +10,12 @@
             {{ pins.description }}
         </p>
     </article>
+
     <a href="{{ path('edit', {id: pins.id}) }}">Edit</a>
-    <form id="submit" action="{{ path('delete', {id: pins.id}) }}", method="GET">
-        <input type="hidden" name="csrf_token" value="{{ csrf_token('delete' ~ pins.id) }}">
+    <form id="submit" action="{{ path('delete', {id: pins.id}) }}" method="POST">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token('supprimer_' ~ pins.id) }}">
         <input type="hidden" name="_method" value="DELETE">
         <input type="submit" value="Delete" >
     </form>
 {% endblock %}
+ 

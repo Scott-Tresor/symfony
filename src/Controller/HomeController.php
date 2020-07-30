@@ -87,7 +87,7 @@ class HomeController extends AbstractController
     }
 
     /**
-     * @Route("/pins/{id<[0-9]+>}/delete", name="delete", methods="GET|PUT")
+     * @Route("/pins/{id<[0-9]+>}/delete", name="delete")
      * @param Pins $pins
      * @param EntityManagerInterface $em
      * @return Response
@@ -97,7 +97,7 @@ class HomeController extends AbstractController
     {
         if (
             $this->isCsrfTokenValid(
-                'delete'.$pins->getId(),
+                'supprimer_' . $pins->getId(),
                 $request->request->get('csrf_token')
             ))
         {
