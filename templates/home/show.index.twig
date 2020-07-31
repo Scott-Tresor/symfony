@@ -5,7 +5,7 @@
 {% block body %}
     <div class="container mt-2">
         <article>
-            <h2>{{ pins.titre }}</h2>
+            <h1>{{ pins.titre }}</h1>
 
             <p>
                 {{ pins.description }}
@@ -20,7 +20,7 @@
         <form id="submit" action="{{ path('delete', {id: pins.id}) }}" method="POST">
             <input type="hidden" name="csrf_token" value="{{ csrf_token('supprimer_' ~ pins.id) }}">
             <input type="hidden" name="_method" value="DELETE">
-            <input type="submit" value="Delete">
+            <input type="submit" value="Delete" class="btn btn-danger">
         </form>
     </div>
 {% endblock %}
