@@ -17,7 +17,7 @@ class PinType extends AbstractType
         $builder
             ->add('imageFile', VichImageType::class, [
                 'required' => false,
-                'allow_delete' => false,
+                'allow_delete' => true,
                 'download_uri' => false,
                 'imagine_pattern' => 'squared_thumbnail_smail'
             ])

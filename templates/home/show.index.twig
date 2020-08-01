@@ -4,23 +4,42 @@
 
 {% block body %}
     <div class="container mt-2">
-        <article>
-            <h1>{{ pins.titre }}</h1>
+        <div class="col-md-7 mt-4">
+            <div>
+                <img 
+                src="{{ 
+                    (pins.imageName ? 
+                    vich_uploader_asset(pins) : 
+                    asset('build/image/image.jpg')) | 
+                    imagine_filter('squared_thumbnail_medium') }}" 
+                alt="{{ pins.titre }}" 
+                class="w-100">
+            </div>
+            <div class="mt-4">
+                <article>
+                    <h1 class="text-muted h3 mb-4">{{ pins.titre }}</h1>
 
-            <p>
-                {{ pins.description }}
-            </p>
+                    <p>
+                        {{ pins.description }}
+                    </p>
 
-            <p>
-                Poster il y a {{ pins.createdAt|ago }}
-            </p>
-        </article>
+                    <p>
+                        Poster  {{ pins.createdAt|ago }}
+                    </p>
+                </article>
 
-        <a href="{{ path('edit', {id: pins.id}) }}">Edit</a>
-        <form id="submit" action="{{ path('delete', {id: pins.id}) }}" method="POST">
-            <input type="hidden" name="csrf_token" value="{{ csrf_token('supprimer_' ~ pins.id) }}">
-            <input type="hidden" name="_method" value="DELETE">
-            <input type="submit" value="Delete" class="btn btn-danger">
-        </form>
+                <a href="{{ path('edit', {id: pins.id}) }}" class="btn btn-light">Edit</a>
+                <a href="#" class="btn btn-light" onclick="event.preventDefault(); confirm('Voulez vous supprimer ?') && document.querySelector('.submit').submit();" href="{{ path('edit', {id: pins.id}) }}">
+                    Delete
+                </a>
+                <form id="submit" action="{{ path('delete', {id: pins.id}) }}" method="POST" style="display: none;">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token('supprimer_' ~ pins.id) }}">
+                    <input type="hidden" name="_method" value="DELETE">
+                </form>
+            </div>
+        </div>
+        <div class="col-md-5">
+
+        </div>
     </div>
 {% endblock %}

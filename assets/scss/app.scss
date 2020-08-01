@@ -12,3 +12,16 @@
 body{
     font-family: $params_family;
 }
+
+.vich-image{
+    .form-check {
+        @extend .mt-2;
+    }
+
+    img{
+        @extend .img-thumbnail;
+        @extend .rounded;
+        @extend .shadow;
+        @extend .mb-1;
+    }
+}

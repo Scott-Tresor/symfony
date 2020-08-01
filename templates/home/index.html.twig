@@ -4,14 +4,41 @@
 
 {% block body %}
     <div class="container mt-2">
-        {% for pins in pin %}
-            <article>
-                <h2><a href="{{ path('detail', { id: pins.id }) }}">{{ pins.titre }}</a></h2>
-
-                <p>
-                    {{ pins.description }}
-                </p>
-            </article>
-        {% endfor %}
+        {% if pin|length > 0 %}
+            <h2 class="text-center text-muted mt-4 mb-5">Publication des informations</h2>
+            {% for row in pin|batch(3) %}
+                <div class="row mb-5">
+                    {% for pins in row %}
+                        <div class="col-md-4">
+                            <article class="rounded shadow">
+                                <a href="{{ path('detail', { id: pins.id }) }}">
+                                    <img 
+                                        src="{{ 
+                                            (pins.imageName ? 
+                                            vich_uploader_asset(pins) : 
+                                            asset('build/image/image.jpg')) | 
+                                            imagine_filter('squared_thumbnail_medium') }}" 
+                                        alt="{{ pins.titre }}" 
+                                        class="w-100">
+                                </a>
+                                <h2 class="pl-3 pt-3 h4 text-muted">
+                                    <a class="text-muted text-decoration-none" href="{{ path('detail', { id: pins.id }) }}">
+                                        {{ pins.titre }}
+                                    </a>
+                                </h2>
+                                <p class="text-muted pl-3 pb-3">
+                                    <small>
+                                        Cree par [SCOTT TRESOR]
+                                    </small>
+                                </p>
+                            </article>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+        {% else %}
+            <h2 class="text-center mt-4">Pas des informations correspondants  pour ses  Pins</h2>
+        {% endif %}
+        
     </div>
 {% endblock %}
