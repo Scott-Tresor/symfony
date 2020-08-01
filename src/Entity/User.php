@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Entity\Traits\TimeStampable;
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -49,6 +51,16 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=255)
      */
     private $lastName;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Pins::class, mappedBy="userId", orphanRemoval=true)
+     */
+    private $pins;
+
+    public function __construct()
+    {
+        $this->pins = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -148,6 +160,37 @@ class User implements UserInterface
     public function setLastName(string $lastName): self
     {
         $this->lastName = $lastName;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Pins[]
+     */
+    public function getPins(): Collection
+    {
+        return $this->pins;
+    }
+
+    public function addPin(Pins $pin): self
+    {
+        if (!$this->pins->contains($pin)) {
+            $this->pins[] = $pin;
+            $pin->setUserId($this);
+        }
+
+        return $this;
+    }
+
+    public function removePin(Pins $pin): self
+    {
+        if ($this->pins->contains($pin)) {
+            $this->pins->removeElement($pin);
+            // set the owning side to null (unless already changed)
+            if ($pin->getUserId() === $this) {
+                $pin->setUserId(null);
+            }
+        }
 
         return $this;
     }
