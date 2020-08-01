@@ -7,19 +7,19 @@
         <div class="col-md-7 mt-4">
             <div>
                 <img 
-                src="{{ 
-                    (pins.imageName ? 
-                    vich_uploader_asset(pins) : 
-                    asset('build/image/image.jpg')) | 
-                    imagine_filter('squared_thumbnail_medium') }}" 
-                alt="{{ pins.titre }}" 
-                class="w-100">
+                    src="{{ 
+                        (pins.imageName ? 
+                        vich_uploader_asset(pins) : 
+                        asset('build/image/image.jpg')) | 
+                        imagine_filter('squared_thumbnail_medium') }}" 
+                    alt="{{ pins.titre }}" 
+                    class="w-100">
             </div>
             <div class="mt-4">
                 <article>
                     <h1 class="text-muted h3 mb-4">{{ pins.titre }}</h1>
 
-                    <p>
+                    <p class="text-muted">
                         {{ pins.description }}
                     </p>
 
