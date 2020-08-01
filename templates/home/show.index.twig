@@ -9,9 +9,9 @@
                 <img 
                     src="{{ 
                         (pins.imageName ? 
-                        vich_uploader_asset(pins) : 
+                        vich_uploader_asset(pins, 'imageFile') : 
                         asset('build/image/image.jpg')) | 
-                        imagine_filter('squared_thumbnail_medium') }}" 
+                        imagine_filter('squared_thumbnail_small') }}" 
                     alt="{{ pins.titre }}" 
                     class="w-100">
             </div>
@@ -29,12 +29,13 @@
                 </article>
 
                 <a href="{{ path('edit', {id: pins.id}) }}" class="btn btn-light">Edit</a>
-                <a href="#" class="btn btn-light" onclick="event.preventDefault(); confirm('Voulez vous supprimer ?') && document.querySelector('.submit').submit();" href="{{ path('edit', {id: pins.id}) }}">
-                    Delete
-                </a>
-                <form id="submit" action="{{ path('delete', {id: pins.id}) }}" method="POST" style="display: none;">
+                <form 
+                    action="{{ path('delete', {id: pins.id}) }}" 
+                    method="POST" onclick="event.preventDefault(); confirm('Voulez vous supprimer ?')">
                     <input type="hidden" name="csrf_token" value="{{ csrf_token('supprimer_' ~ pins.id) }}">
                     <input type="hidden" name="_method" value="DELETE">
+                    <input type="hidden" name="_method" value="DELETE">
+                    <button class="btn btn-light">Delete</button>
                 </form>
             </div>
         </div>

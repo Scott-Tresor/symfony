@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Pins;
 use App\Form\PinType;
 use App\Repository\PinsRepository;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -32,14 +33,16 @@ class HomeController extends AbstractController
      * @return Response
      * @author scotttresor <scotttresor@gmail.com>
      */
-    public function create(Request $request, EntityManagerInterface $em): Response
+    public function create(Request $request, EntityManagerInterface $em, UserRepository $users): Response
     {
-        $form = $this->createForm(PinType::class);
+        $pins = new Pins;
+        $form = $this->createForm(PinType::class, $pins);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $pin = $form->getData();
-            $em->persist($pin);
+            $scott = $users->findOneBy(['email' => 'scotttresor@gmail.com']);
+            $pins->setUserId($scott);
+            $em->persist($pins);
             $em->flush();
             $this->addFlash('success','Message poster avec success');
             return $this->redirectToRoute('home');

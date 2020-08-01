@@ -194,4 +194,14 @@ class User implements UserInterface
 
         return $this;
     }
+
+    
+    /**
+     * @return string
+     * @author scotttresor <scotttresor@gmail.com>
+     */
+    public function getFullname(): string
+    {
+        return $this->getFirstName() . ' ' . $this->getLastName();
+    }
 }

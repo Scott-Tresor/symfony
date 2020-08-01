@@ -15,7 +15,7 @@
                                     <img 
                                         src="{{ 
                                             (pins.imageName ? 
-                                            vich_uploader_asset(pins) : 
+                                            vich_uploader_asset(pins, 'imageFile') : 
                                             asset('build/image/image.jpg')) | 
                                             imagine_filter('squared_thumbnail_medium') }}" 
                                         alt="{{ pins.titre }}" 
@@ -28,7 +28,7 @@
                                 </h2>
                                 <p class="text-muted pl-3 pb-3">
                                     <small>
-                                        Cree par [SCOTT TRESOR]
+                                        Cree par -{{ pins.user.fullname }}
                                     </small>
                                 </p>
                             </article>
