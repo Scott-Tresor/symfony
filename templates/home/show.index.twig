@@ -31,6 +31,7 @@
                 <a href="{{ path('edit', {id: pins.id}) }}" class="btn btn-light">Edit</a>
                 <form 
                     action="{{ path('delete', {id: pins.id}) }}" 
+                     class="ml-auto"
                     method="POST" onclick="event.preventDefault(); confirm('Voulez vous supprimer ?')">
                     <input type="hidden" name="csrf_token" value="{{ csrf_token('supprimer_' ~ pins.id) }}">
                     <input type="hidden" name="_method" value="DELETE">
