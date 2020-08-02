@@ -8,6 +8,7 @@ use App\Repository\UserRepository;
 use App\Entity\Traits\TimeStampable;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -15,6 +16,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @ORM\Table(name="users")
  * @ORM\HasLifecycleCallbacks
+ * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
  */
 class User implements UserInterface
 {
@@ -63,6 +65,11 @@ class User implements UserInterface
      * @ORM\OneToMany(targetEntity=Pins::class, mappedBy="userId", orphanRemoval=true)
      */
     private $pins;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isVerified = false;
 
     public function __construct()
     {
@@ -210,5 +217,17 @@ class User implements UserInterface
     public function getFullname(): string
     {
         return $this->getFirstName() . ' ' . $this->getLastName();
+    }
+
+    public function isVerified(): bool
+    {
+        return $this->isVerified;
+    }
+
+    public function setIsVerified(bool $isVerified): self
+    {
+        $this->isVerified = $isVerified;
+
+        return $this;
     }
 }
