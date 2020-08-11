@@ -8,10 +8,7 @@
             <div>
                 <img 
                     src="{{ 
-                        (pins.imageName ? 
-                        vich_uploader_asset(pins, 'imageFile') : 
-                        asset('build/image/image.jpg')) | 
-                        imagine_filter('squared_thumbnail_small') }}" 
+                        vich_uploader_asset(pins)  }}" 
                     alt="{{ pins.titre }}" 
                     class="w-100">
             </div>
@@ -32,7 +29,7 @@
                 <form 
                     action="{{ path('delete', {id: pins.id}) }}" 
                      class="ml-auto"
-                    method="POST" onclick="event.preventDefault(); confirm('Voulez vous supprimer ?')">
+                    method="POST" onclick="event.preventDefault() confirm('Voulez vous supprimer ?')">
                     <input type="hidden" name="csrf_token" value="{{ csrf_token('supprimer_' ~ pins.id) }}">
                     <input type="hidden" name="_method" value="DELETE">
                     <input type="hidden" name="_method" value="DELETE">
