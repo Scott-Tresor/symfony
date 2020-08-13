@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Admin{% endblock %}
+
+{% block body %}
+    <div class="container mt-2">
+
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Titre</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for items in pins %}
+                    <tr>
+                        <th scope="row">{{ items.id }}</th>
+                        <td>{{ items.titre }}</td>
+                        <td>
+                            <a href="{{ path('admin_edit', {id: items.id}) }}" class="btn btn-primary">Edit</a>
+                            <form 
+                                action="{{ path('delete', {id: items.id}) }}" 
+                                class="ml-auto"
+                                method="POST" onclick="event.preventDefault() confirm('Voulez vous supprimer ?')">
+                                <input type="hidden" name="csrf_token" value="{{ csrf_token('supprimer_' ~ pins.id) }}">
+                                <input type="hidden" name="_method" value="DELETE">
+                                <input type="hidden" name="_method" value="DELETE">
+                                <button class="btn btn-danger">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
