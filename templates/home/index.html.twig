@@ -13,11 +13,7 @@
                             <article class="rounded shadow">
                                 <a href="{{ path('detail', { id: pins.id }) }}">
                                     <img 
-                                        src="{{ 
-                                            (pins.imageName ? 
-                                            vich_uploader_asset(pins, 'imageFile') : 
-                                            asset('build/image/image.jpg')) | 
-                                            imagine_filter('squared_thumbnail_medium') }}" 
+                                        src="{{ vich_uploader_asset(pins)  }}" 
                                         alt="{{ pins.titre }}" 
                                         class="w-100">
                                 </a>
